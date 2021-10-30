@@ -32,8 +32,8 @@ public final class Main extends JavaPlugin implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        player.sendMessage(ChatColor.DARK_RED + "You died!");
-        player.sendMessage(ChatColor.AQUA + "Your death-coordinates are: " + ChatColor.GOLD +  player.getLocation().getBlockX() + " " + player.getLocation().getBlockY() + " " + player.getLocation().getBlockZ() + " ");
+        player.sendMessage(ChatColor.DARK_RED + "Ты умер!");
+        player.sendMessage(ChatColor.AQUA + "Тп на место смерти: /back");
         Bukkit.broadcastMessage(ChatColor.RED + event.getDeathMessage());
         event.setDeathMessage("");
         positions.put(player, player.getLocation());
@@ -46,13 +46,13 @@ public final class Main extends JavaPlugin implements Listener {
             if(player.hasPermission("back.back") || player.isOp()) {
                 if (positions.containsKey(player)) {
                         player.teleport(positions.get(player));
-                        player.sendMessage(ChatColor.GOLD + "You got teleported to your last death point!");
+                        player.sendMessage(ChatColor.GOLD + "Ты телепортирован на место смерти!");
                         positions.remove(player);
                     }else{
-                        player.sendMessage(ChatColor.DARK_RED + "You don't have a death position!");
+                        player.sendMessage(ChatColor.DARK_RED + "У тебя нет точки смерти!");
                     }
                 }else{
-                player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command!");
+                player.sendMessage(ChatColor.DARK_RED + "Нет прав!");
             }
         }
         return true;
